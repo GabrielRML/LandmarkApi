@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LandmarkApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/tourist-points")]
 public class TouristPointController : ControllerBase
 {
     private readonly ITouristPointService _service;
