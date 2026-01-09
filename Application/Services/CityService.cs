@@ -25,6 +25,12 @@ public class CityService : ICityService
         return cities.Select(MapToDto);
     }
 
+    public async Task<IEnumerable<CityDto>> GetByStateIdAsync(int stateId)
+    {
+        var cities = await _repository.GetByStateIdAsync(stateId);
+        return cities.Select(MapToDto);
+    }
+
     private static CityDto MapToDto(Domain.Entities.City city)
     {
         return new CityDto

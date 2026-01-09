@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LandmarkApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/states")]
 public class StatesController : ControllerBase
 {
     private readonly IStateService _service;

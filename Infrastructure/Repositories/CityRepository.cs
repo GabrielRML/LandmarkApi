@@ -28,4 +28,13 @@ public class CityRepository : ICityRepository
             .OrderBy(c => c.Name)
             .ToListAsync();
     }
+
+    public async Task<IEnumerable<City>> GetByStateIdAsync(int stateId)
+    {
+        return await _context.Cities
+            .Include(c => c.State)
+            .Where(c => c.StateId == stateId)
+            .OrderBy(c => c.Name)
+            .ToListAsync();
+    }
 }

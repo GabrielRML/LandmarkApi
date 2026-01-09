@@ -6,4 +6,5 @@ public interface ICityService
 {
     Task<CityDto?> GetByIdAsync(int id);
     Task<IEnumerable<CityDto>> GetAllAsync();
+    Task<IEnumerable<CityDto>> GetByStateIdAsync(int stateId);
 }

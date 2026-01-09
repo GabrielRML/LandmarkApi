@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace LandmarkApi.Controllers;
 
 [ApiController]
-[Route("api/[controller]")]
+[Route("api/cities")]
 public class CitiesController : ControllerBase
 {
     private readonly ICityService _service;
@@ -30,5 +30,12 @@ public class CitiesController : ControllerBase
             return NotFound();
 
         return Ok(city);
+    }
+
+    [HttpGet("state/{stateId}")]
+    public async Task<IActionResult> GetByStateId(int stateId)
+    {
+        var cities = await _service.GetByStateIdAsync(stateId);
+        return Ok(cities);
     }
 }

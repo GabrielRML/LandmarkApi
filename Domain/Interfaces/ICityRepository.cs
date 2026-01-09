@@ -6,4 +6,5 @@ public interface ICityRepository
 {
     Task<City?> GetByIdAsync(int id);
     Task<IEnumerable<City>> GetAllAsync();
+    Task<IEnumerable<City>> GetByStateIdAsync(int stateId);
 }
