@@ -25,11 +25,18 @@ public class TouristPointRepository : ITouristPointRepository
         return await _context.TouristPoints.ToListAsync();
     }
 
-    public async Task<PagedResultDto<TouristPoint>> GetPagedAsync(int pageNumber, int pageSize)
+    public async Task<PagedResultDto<TouristPoint>> GetPagedAsync(int pageNumber, int pageSize, string? name = null)
     {
-        var totalCount = await _context.TouristPoints.CountAsync();
+        var query = _context.TouristPoints.AsQueryable();
         
-        var items = await _context.TouristPoints
+        if (!string.IsNullOrWhiteSpace(name))
+        {
+            query = query.Where(t => t.Name.Contains(name));
+        }
+        
+        var totalCount = await query.CountAsync();
+        
+        var items = await query
             .OrderBy(t => t.Name)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)

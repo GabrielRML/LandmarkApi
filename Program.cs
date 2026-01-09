@@ -1,3 +1,5 @@
+using LandmarkApi.Application.Interfaces;
+using LandmarkApi.Application.Services;
 using LandmarkApi.Domain.Interfaces;
 using LandmarkApi.Infrastructure.Data;
 using LandmarkApi.Infrastructure.Repositories;
@@ -11,6 +13,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<ITouristPointRepository, TouristPointRepository>();
+builder.Services.AddScoped<ITouristPointService, TouristPointService>();
 
 builder.Services.AddControllers();
 
