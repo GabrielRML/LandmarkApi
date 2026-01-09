@@ -25,7 +25,7 @@ public class TouristPointRepository : ITouristPointRepository
         return await _context.TouristPoints.ToListAsync();
     }
 
-    public async Task<PagedResultDto<TouristPoint>> GetPagedAsync(int pageNumber, int pageSize, string? name = null)
+    public async Task<PagedResultDto<TouristPoint>> GetPagedAsync(int pageNumber, int pageSize, string? name = null, string orderByCreatedAt = "desc")
     {
         var query = _context.TouristPoints.AsQueryable();
         
@@ -36,8 +36,11 @@ public class TouristPointRepository : ITouristPointRepository
         
         var totalCount = await query.CountAsync();
         
+        query = orderByCreatedAt.ToLower() == "asc" 
+            ? query.OrderBy(t => t.CreatedAt) 
+            : query.OrderByDescending(t => t.CreatedAt);
+        
         var items = await query
-            .OrderBy(t => t.Name)
             .Skip((pageNumber - 1) * pageSize)
             .Take(pageSize)
             .ToListAsync();

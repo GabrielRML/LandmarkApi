@@ -33,7 +33,8 @@ public class TouristPointController : ControllerBase
     public async Task<ActionResult> GetPaged(
         [FromQuery] int pageNumber = 1,
         [FromQuery] int pageSize = 10,
-        [FromQuery] string? name = null)
+        [FromQuery] string? name = null,
+        [FromQuery] string orderByCreatedAt = "desc")
     {
         if (pageNumber < 1)
             return BadRequest(new { message = "O número da página deve ser maior que 0" });
@@ -41,7 +42,10 @@ public class TouristPointController : ControllerBase
         if (pageSize < 1 || pageSize > 100)
             return BadRequest(new { message = "O tamanho da página deve estar entre 1 e 100" });
 
-        var result = await _service.GetPagedAsync(pageNumber, pageSize, name);
+        if (orderByCreatedAt.ToLower() != "asc" && orderByCreatedAt.ToLower() != "desc")
+            return BadRequest(new { message = "O parâmetro orderByCreatedAt deve ser 'asc' ou 'desc'" });
+
+        var result = await _service.GetPagedAsync(pageNumber, pageSize, name, orderByCreatedAt);
         return Ok(result);
     }
 

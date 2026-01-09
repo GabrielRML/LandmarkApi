@@ -7,7 +7,7 @@ public interface ITouristPointService
 {
     Task<TouristPointDto?> GetByIdAsync(Guid id);
     Task<IEnumerable<TouristPointDto>> GetAllAsync();
-    Task<PagedResultDto<TouristPointDto>> GetPagedAsync(int pageNumber, int pageSize, string? name = null);
+    Task<PagedResultDto<TouristPointDto>> GetPagedAsync(int pageNumber, int pageSize, string? name = null, string orderByCreatedAt = "desc");
     Task<TouristPointDto> CreateAsync(CreateTouristPointDto createDto);
     Task<TouristPointDto?> UpdateAsync(Guid id, UpdateTouristPointDto updateDto);
     Task<bool> DeleteAsync(Guid id);

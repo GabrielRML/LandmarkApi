@@ -27,9 +27,9 @@ public class TouristPointService : ITouristPointService
         return touristPoints.Select(MapToDto);
     }
 
-    public async Task<PagedResultDto<TouristPointDto>> GetPagedAsync(int pageNumber, int pageSize, string? name = null)
+    public async Task<PagedResultDto<TouristPointDto>> GetPagedAsync(int pageNumber, int pageSize, string? name = null, string orderByCreatedAt = "desc")
     {
-        var pagedResult = await _repository.GetPagedAsync(pageNumber, pageSize, name);
+        var pagedResult = await _repository.GetPagedAsync(pageNumber, pageSize, name, orderByCreatedAt);
         
         return new PagedResultDto<TouristPointDto>
         {
