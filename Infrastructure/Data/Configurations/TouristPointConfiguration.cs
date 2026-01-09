@@ -27,24 +27,13 @@ public class TouristPointConfiguration : IEntityTypeConfiguration<TouristPoint>
             .IsRequired()
             .HasMaxLength(300);
 
-        builder.Property(t => t.IbgeCode)
-            .IsRequired()
-            .HasMaxLength(20);
-
-        builder.Property(t => t.CityName)
-            .IsRequired()
-            .HasMaxLength(150);
-
-        builder.Property(t => t.StateName)
-            .IsRequired()
-            .HasMaxLength(100);
-
-        builder.Property(t => t.StateAcronym)
-            .IsRequired()
-            .HasMaxLength(2);
-
         builder.Property(t => t.CreatedAt)
             .IsRequired()
             .HasDefaultValueSql("GETUTCDATE()");
+        
+        builder.HasOne(t => t.City)
+            .WithMany(c => c.TouristPoints)
+            .HasForeignKey(t => t.CityId)
+            .OnDelete(DeleteBehavior.Restrict);
     }
 }

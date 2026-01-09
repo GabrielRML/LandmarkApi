@@ -15,16 +15,6 @@ public class UpdateTouristPointDto
     [Required(ErrorMessage = "A localização é obrigatória")]
     public string Location { get; set; } = string.Empty;
 
-    [Required(ErrorMessage = "O código IBGE é obrigatório")]
-    public string IbgeCode { get; set; } = string.Empty;
-
-    [Required(ErrorMessage = "O nome da cidade é obrigatório")]
-    public string CityName { get; set; } = string.Empty;
-
-    [Required(ErrorMessage = "O nome do estado é obrigatório")]
-    public string StateName { get; set; } = string.Empty;
-
-    [Required(ErrorMessage = "A sigla do estado é obrigatória")]
-    [StringLength(2, ErrorMessage = "A sigla do estado deve ter 2 caracteres")]
-    public string StateAcronym { get; set; } = string.Empty;
+    [Required(ErrorMessage = "O ID da cidade é obrigatório")]
+    public int CityId { get; set; }
 }

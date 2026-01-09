@@ -48,10 +48,7 @@ public class TouristPointService : ITouristPointService
             Name = createDto.Name,
             Description = createDto.Description,
             Location = createDto.Location,
-            IbgeCode = createDto.IbgeCode,
-            CityName = createDto.CityName,
-            StateName = createDto.StateName,
-            StateAcronym = createDto.StateAcronym
+            CityId = createDto.CityId
         };
 
         await _repository.AddAsync(touristPoint);
@@ -68,10 +65,7 @@ public class TouristPointService : ITouristPointService
         touristPoint.Name = updateDto.Name;
         touristPoint.Description = updateDto.Description;
         touristPoint.Location = updateDto.Location;
-        touristPoint.IbgeCode = updateDto.IbgeCode;
-        touristPoint.CityName = updateDto.CityName;
-        touristPoint.StateName = updateDto.StateName;
-        touristPoint.StateAcronym = updateDto.StateAcronym;
+        touristPoint.CityId = updateDto.CityId;
 
         await _repository.UpdateAsync(touristPoint);
         return MapToDto(touristPoint);
@@ -96,10 +90,12 @@ public class TouristPointService : ITouristPointService
             Name = touristPoint.Name,
             Description = touristPoint.Description,
             Location = touristPoint.Location,
-            IbgeCode = touristPoint.IbgeCode,
-            CityName = touristPoint.CityName,
-            StateName = touristPoint.StateName,
-            StateAcronym = touristPoint.StateAcronym,
+            CityId = touristPoint.CityId,
+            CityName = touristPoint.City?.Name ?? string.Empty,
+            CityIbgeCode = touristPoint.City?.IbgeCode ?? string.Empty,
+            StateName = touristPoint.City?.State?.Name ?? string.Empty,
+            StateAcronym = touristPoint.City?.State?.Acronym ?? string.Empty,
+            StateIbgeCode = touristPoint.City?.State?.IbgeCode ?? string.Empty,
             CreatedAt = touristPoint.CreatedAt
         };
     }
