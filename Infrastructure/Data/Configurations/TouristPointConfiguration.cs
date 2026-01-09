@@ -42,5 +42,9 @@ public class TouristPointConfiguration : IEntityTypeConfiguration<TouristPoint>
         builder.Property(t => t.StateAcronym)
             .IsRequired()
             .HasMaxLength(2);
+
+        builder.Property(t => t.CreatedAt)
+            .IsRequired()
+            .HasDefaultValueSql("GETUTCDATE()");
     }
 }

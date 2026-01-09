@@ -13,4 +13,5 @@ public class TouristPoint
     public string CityName { get; set; } = string.Empty;
     public string StateName { get; set; } = string.Empty;
     public string StateAcronym { get; set; } = string.Empty;
+    public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 }

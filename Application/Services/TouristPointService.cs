@@ -99,7 +99,8 @@ public class TouristPointService : ITouristPointService
             IbgeCode = touristPoint.IbgeCode,
             CityName = touristPoint.CityName,
             StateName = touristPoint.StateName,
-            StateAcronym = touristPoint.StateAcronym
+            StateAcronym = touristPoint.StateAcronym,
+            CreatedAt = touristPoint.CreatedAt
         };
     }
 }
