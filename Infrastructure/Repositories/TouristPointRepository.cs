@@ -17,17 +17,26 @@ public class TouristPointRepository : ITouristPointRepository
 
     public async Task<TouristPoint?> GetByIdAsync(Guid id)
     {
-        return await _context.TouristPoints.FindAsync(id);
+        return await _context.TouristPoints
+            .Include(t => t.City)
+                .ThenInclude(c => c.State)
+            .FirstOrDefaultAsync(t => t.Id == id);
     }
 
     public async Task<IEnumerable<TouristPoint>> GetAllAsync()
     {
-        return await _context.TouristPoints.ToListAsync();
+        return await _context.TouristPoints
+            .Include(t => t.City)
+                .ThenInclude(c => c.State)
+            .ToListAsync();
     }
 
     public async Task<PagedResultDto<TouristPoint>> GetPagedAsync(int pageNumber, int pageSize, string? name = null, string orderByCreatedAt = "desc")
     {
-        var query = _context.TouristPoints.AsQueryable();
+        var query = _context.TouristPoints
+            .Include(t => t.City)
+                .ThenInclude(c => c.State)
+            .AsQueryable();
         
         if (!string.IsNullOrWhiteSpace(name))
         {
