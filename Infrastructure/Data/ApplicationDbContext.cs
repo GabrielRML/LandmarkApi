@@ -10,8 +10,6 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-    public DbSet<State> States { get; set; }
-    public DbSet<City> Cities { get; set; }
     public DbSet<TouristPoint> TouristPoints { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

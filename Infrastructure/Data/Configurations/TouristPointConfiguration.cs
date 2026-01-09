@@ -27,12 +27,20 @@ public class TouristPointConfiguration : IEntityTypeConfiguration<TouristPoint>
             .IsRequired()
             .HasMaxLength(300);
 
-        builder.Property(t => t.CityId)
-            .IsRequired();
+        builder.Property(t => t.IbgeCode)
+            .IsRequired()
+            .HasMaxLength(20);
 
-        builder.HasOne(t => t.City)
-            .WithMany(c => c.TouristPoints)
-            .HasForeignKey(t => t.CityId)
-            .OnDelete(DeleteBehavior.Restrict);
+        builder.Property(t => t.CityName)
+            .IsRequired()
+            .HasMaxLength(150);
+
+        builder.Property(t => t.StateName)
+            .IsRequired()
+            .HasMaxLength(100);
+
+        builder.Property(t => t.StateAcronym)
+            .IsRequired()
+            .HasMaxLength(2);
     }
 }

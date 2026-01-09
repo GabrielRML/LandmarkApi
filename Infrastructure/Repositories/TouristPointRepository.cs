@@ -44,42 +44,6 @@ public class TouristPointRepository : ITouristPointRepository
         };
     }
 
-    public async Task<IEnumerable<TouristPoint>> GetByCityIdAsync(int cityId)
-    {
-        return await _context.TouristPoints
-            .Where(t => t.CityId == cityId)
-            .ToListAsync();
-    }
-
-    public async Task<TouristPoint?> GetWithCityAsync(Guid id)
-    {
-        return await _context.TouristPoints
-            .Include(t => t.City)
-                .ThenInclude(c => c.State)
-            .FirstOrDefaultAsync(t => t.Id == id);
-    }
-
-    public async Task<PagedResultDto<TouristPoint>> GetPagedByCityIdAsync(int cityId, int pageNumber, int pageSize)
-    {
-        var query = _context.TouristPoints.Where(t => t.CityId == cityId);
-        
-        var totalCount = await query.CountAsync();
-        
-        var items = await query
-            .OrderBy(t => t.Name)
-            .Skip((pageNumber - 1) * pageSize)
-            .Take(pageSize)
-            .ToListAsync();
-
-        return new PagedResultDto<TouristPoint>
-        {
-            Items = items,
-            TotalCount = totalCount,
-            PageNumber = pageNumber,
-            PageSize = pageSize
-        };
-    }
-
     public async Task AddAsync(TouristPoint touristPoint)
     {
         await _context.TouristPoints.AddAsync(touristPoint);
@@ -96,10 +60,5 @@ public class TouristPointRepository : ITouristPointRepository
     {
         _context.TouristPoints.Remove(touristPoint);
         await _context.SaveChangesAsync();
-    }
-
-    public async Task<bool> ExistsAsync(Guid id)
-    {
-        return await _context.TouristPoints.AnyAsync(t => t.Id == id);
     }
 }

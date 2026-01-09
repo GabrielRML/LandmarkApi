@@ -9,6 +9,8 @@ public class TouristPoint
     [MaxLength(100)]
     public string Description { get; set; } = string.Empty;
     public string Location { get; set; } = string.Empty;
-    public int CityId { get; set; }
-    public City City { get; set; } = null!;
+    public string IbgeCode { get; set; } = string.Empty;
+    public string CityName { get; set; } = string.Empty;
+    public string StateName { get; set; } = string.Empty;
+    public string StateAcronym { get; set; } = string.Empty;
 }
